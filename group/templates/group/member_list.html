@@ -1,0 +1,25 @@
+<!-- Your member_list.html template -->
+
+{% extends "base.html" %}
+
+{% block content %}
+  {% if member_list %}
+    <ul class="member-list">
+      {% for member in member_list %}
+      <li class="member-item">
+        <h2><a href="{% url 'members' %}" class="member-name">{{ member.first_name}} {{member.last_name}}</a></h2>
+        <p class="fields">
+          <ul>
+            {% for field in member.focus_fields.all %}
+              <li>{{ field.name }}</li>
+            {% endfor %}
+          </ul>
+        </p>
+        <p class="about">{{ member.about|truncatechars:300 }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no members.</p>
+  {% endif %}
+{% endblock %}
