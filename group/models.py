@@ -27,7 +27,8 @@ class Member(models.Model):
     last_name = models.CharField(max_length=50)
     focus_fields = models.ManyToManyField(FocusField, help_text='Fields a member is focusing on', verbose_name='Focus Fields')
     about = models.TextField(help_text='A brief summary about this person')
-
+    class Meta:
+        ordering = ['first_name','last_name']
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
